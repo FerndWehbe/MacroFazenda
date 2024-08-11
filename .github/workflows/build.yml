@@ -32,21 +32,22 @@ jobs:
           copy colheita.png release\  # Caminho do arquivo colheita.png
 
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
           name: release_assets
 
       - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: v1.0.0 # atualize conforme necessário
-          release_name: Release v1.0.0 # atualize conforme necessário
-          draft: false
-          prerelease: false
-          files: release/macro.exe,release/colheita.png
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v1.0.0 # Atualize conforme necessário
+          release_name: Release v1.0.0 # Atualize conforme necessário
+          assets: release/macro.exe,release/colheita.png # Liste os arquivos desejados
+
