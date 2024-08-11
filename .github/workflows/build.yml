@@ -49,11 +49,9 @@ jobs:
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
-        with:
-          files: release_assets/macro.exe,release_assets/colheita.png
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          files: release_assets/macro.exe,release_assets/colheita.png
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
-
