@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: windows-latest
@@ -30,26 +31,25 @@ jobs:
           mkdir release
           copy dist\macro.exe release\  # Caminho do executável gerado
           copy colheita.png release\  # Caminho do arquivo colheita.png
-      
+
       - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: release_assets
-        path: release/
+        uses: actions/upload-artifact@v2
+        with:
+          name: release_assets
+          path: release/
 
   release:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: release_assets
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: release_assets
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: release_assets/macro.exe,release_assets/colheita.png
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release_assets/macro.exe,release_assets/colheita.png
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
