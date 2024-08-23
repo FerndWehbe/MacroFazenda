@@ -10,7 +10,6 @@ from tkinter import filedialog, ttk
 
 import keyboard
 import pyautogui
-from PIL import ImageGrab
 from pynput import mouse
 
 CONFIG_FILE = "preset_config.json"
@@ -36,10 +35,6 @@ class AutomationConfigApp:
         self.opcao_cenoura = tk.StringVar()
         self.opcao_cogumelo = tk.StringVar()
         self.opcao_tomate = tk.StringVar()
-        self.pos_confirm = tk.StringVar()
-
-        # Variável para cor
-        self.color_confirm = tk.StringVar()
 
         # Variável para ciclo de plantação
         self.ciclo_plantacao = tk.StringVar()
@@ -60,12 +55,6 @@ class AutomationConfigApp:
         self.create_label_entry_button("Posição Cenoura", self.opcao_cenoura, 5)
         self.create_label_entry_button("Posição Cogumelo", self.opcao_cogumelo, 6)
         self.create_label_entry_button("Posição Tomate", self.opcao_tomate, 7)
-        self.create_label_entry_button(
-            "Posição Botão AFK", self.pos_confirm, 8, capture_color=True
-        )
-
-        # Criando campo de entrada para cor capturada
-        self.create_label_and_entry("Cor AFK", self.color_confirm, 9)
 
         # Campo para ciclo de plantação
         ttk.Label(master, text="Ciclo Plantação (separado por vírgulas)").grid(
@@ -164,13 +153,6 @@ class AutomationConfigApp:
         if pressed:
             variable.set(f"{x},{y}")
             print(f"Capturado: {x},{y}")
-            if capture_color:
-                # Captura a cor do pixel na posição usando Pillow
-                screenshot = ImageGrab.grab(all_screens=True)
-                color = screenshot.getpixel((x, y))
-                color_str = f"RGB({color[0]},{color[1]},{color[2]})"
-                self.color_confirm.set(color_str)
-                print(f"Cor Capturada: {color_str}")
 
             self.master.config(cursor="")
             # Para o listener após capturar a posição
@@ -206,8 +188,6 @@ class AutomationConfigApp:
             "opcao_cenoura": self.opcao_cenoura.get(),
             "opcao_cogumelo": self.opcao_cogumelo.get(),
             "opcao_tomate": self.opcao_tomate.get(),
-            "pos_confirm": self.pos_confirm.get(),
-            "color_confirm": self.color_confirm.get(),
             "ciclo_plantacao": [
                 plantacao.strip().lower()
                 for plantacao in self.ciclo_plantacao.get().split(",")
@@ -223,8 +203,6 @@ class AutomationConfigApp:
         self.opcao_cenoura.set(config.get("opcao_cenoura", ""))
         self.opcao_cogumelo.set(config.get("opcao_cogumelo", ""))
         self.opcao_tomate.set(config.get("opcao_tomate", ""))
-        self.pos_confirm.set(config.get("pos_confirm", ""))
-        self.color_confirm.set(config.get("color_confirm", ""))
         self.ciclo_plantacao.set(",".join(config.get("ciclo_plantacao", [])))
 
     def clear_config(self):
@@ -237,8 +215,6 @@ class AutomationConfigApp:
         self.opcao_cenoura.set("")
         self.opcao_cogumelo.set("")
         self.opcao_tomate.set("")
-        self.pos_confirm.set("")
-        self.color_confirm.set("")
         self.ciclo_plantacao.set("")
 
     def export_config(self):
@@ -290,17 +266,7 @@ class AutomationConfigApp:
             opcao_cenoura = parse_position(self.opcao_cenoura.get())
             opcao_cogumelo = parse_position(self.opcao_cogumelo.get())
             opcao_tomate = parse_position(self.opcao_tomate.get())
-            pos_confirm = parse_position(self.pos_confirm.get())
 
-            color_confirm = tuple(
-                map(
-                    int,
-                    self.color_confirm.get()
-                    .replace("RGB(", "")
-                    .replace(")", "")
-                    .split(","),
-                )
-            )
             ciclo_plantacao = itertools.cycle(self.ciclo_plantacao.get().split(","))
 
             def get_tipo_plantacao():
@@ -312,7 +278,7 @@ class AutomationConfigApp:
                         icon_path, confidence=conf
                     )
                     if icon_location is not None:
-                        pyautogui.click(icon_location)
+                        pyautogui.moveTo(icon_location)
                     return icon_location
                 except Exception as e:
                     logging.warning(f"Erro ao localizar o ícone: {e}")
@@ -358,20 +324,7 @@ class AutomationConfigApp:
                     pyautogui.click(opcao_tomate)
                 acao()
 
-            def get_confirm():
-                screenshot = ImageGrab.grab(all_screens=True)
-                pixel_color = screenshot.getpixel(pos_confirm)
-                tolerance = 30
-
-                def color_distance(c1, c2):
-                    return sum((c1[i] - c2[i]) ** 2 for i in range(3)) ** 0.5
-
-                return color_distance(pixel_color, color_confirm) <= tolerance
-
             while self.running:
-                if get_confirm():
-                    pyautogui.click(pos_confirm[0], pos_confirm[1])
-
                 loc_harvest = find_and_click_icon(self.colheita)
                 if not loc_harvest:
                     logging.info("Nenhuma Colheita pronta")

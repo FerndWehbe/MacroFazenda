@@ -1,15 +1,14 @@
 {
-    "point_acao": "",
-    "multiplas_caixas": "",
-    "opcao_trigo": "",
-    "opcao_milho": "",
-    "opcao_linho": "",
-    "opcao_cenoura": "",
-    "opcao_cogumelo": "",
-    "opcao_tomate": "",
-    "pos_confirm": "",
-    "color_confirm": "",
+    "point_acao": "2333,801",
+    "multiplas_caixas": "2204,474",
+    "opcao_trigo": "980,925",
+    "opcao_milho": "1079,927",
+    "opcao_linho": "1191,899",
+    "opcao_cenoura": "1284,905",
+    "opcao_cogumelo": "1411,918",
+    "opcao_tomate": "1514,915",
     "ciclo_plantacao": [
-        " "
+        "trigo",
+        "milho"
     ]
 }

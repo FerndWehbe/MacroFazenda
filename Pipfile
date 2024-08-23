@@ -8,6 +8,7 @@ keyboard = "*"
 pyautogui = "*"
 pynput = "*"
 pyinstaller = "*"
+opencv-python = "*"
 
 [dev-packages]
 
