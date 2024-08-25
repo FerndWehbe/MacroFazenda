@@ -1,0 +1,66 @@
+{
+    "label_1": {
+        "pt": "Botão de Ação:",
+        "en": "Action Button:"
+    },
+    "label_2": {
+        "pt": "Área de Colheita:",
+        "en": "Harvest Area:"
+    },
+    "label_3": {
+        "pt": "Posição Trigo:",
+        "en": "Wheat Position:"
+    },
+    "label_4": {
+        "pt": "Posição Milho:",
+        "en": "Corn Position:"
+    },
+    "label_5": {
+        "pt": "Posição Linho:",
+        "en": "Flax Position:"
+    },
+    "label_6": {
+        "pt": "Posição Cenoura:",
+        "en": "Carrot Position:"
+    },
+    "label_7": {
+        "pt": "Posição Cogumelo:",
+        "en": "Mushroom Position:"
+    },
+    "label_8": {
+        "pt": "Posição Tomate:",
+        "en": "Tomato Position:"
+    },
+    "label_9": {
+        "pt": "Ciclo Plantação:",
+        "en": "Planting Cycle:"
+    },
+    "button_1": {
+        "pt": "Salvar Configurações",
+        "en": "Save Configurations"
+    },
+    "button_2": {
+        "pt": "Limpar Configurações",
+        "en": "Clear Configurations"
+    },
+    "button_3": {
+        "pt": "Exportar Configuração",
+        "en": "Export Configuration"
+    },
+    "button_4": {
+        "pt": "Importar Configuração",
+        "en": "Import Configuration"
+    },
+    "start_button": {
+        "pt": "Iniciar",
+        "en": "Start"
+    },
+    "stop_button": {
+        "pt": "Parar",
+        "en": "Stop"
+    },
+    "capture_button": {
+        "pt": "Capturar",
+        "en": "Capture"
+    }
+}

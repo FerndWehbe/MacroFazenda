@@ -9,6 +9,8 @@ pyautogui = "*"
 pynput = "*"
 pyinstaller = "*"
 opencv-python = "*"
+ttkthemes = "*"
+pyside6 = "*"
 
 [dev-packages]
 
