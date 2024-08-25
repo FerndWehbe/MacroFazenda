@@ -428,8 +428,6 @@ class UIMainWindow:
             def parse_position(pos_str):
                 return tuple(map(int, pos_str.split(","))) if pos_str else ()
 
-            print(json.dumps(self.config))
-
             point_acao = parse_position(self.config.get("point_acao", ""))
             multiplas_caixas = parse_position(self.config.get("multiplas_caixas", ""))
             opcao_trigo = parse_position(self.config.get("opcao_trigo", ""))
@@ -478,7 +476,6 @@ class UIMainWindow:
                     return "a"
 
             def acao():
-                print(self.config)
                 pyautogui.click(multiplas_caixas)
                 pyautogui.click(point_acao)
                 time.sleep(1)
