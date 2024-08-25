@@ -10,6 +10,7 @@ import pyautogui
 from pynput import mouse
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
+    QCheckBox,
     QComboBox,
     QFileDialog,
     QFrame,
@@ -21,14 +22,6 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QSpacerItem,
     QVBoxLayout,
-)
-
-CONFIG_FILE = "preset_config.json"
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("automacao.log"), logging.StreamHandler()],
 )
 
 
@@ -48,6 +41,7 @@ class UIMainWindow:
 
         # Variáveis de configuração
         self.config = {
+            "comprar_itens": False,  # Adiciona a configuração para a checkbox
             "point_acao": "",
             "multiplas_caixas": "",
             "opcao_trigo": "",
@@ -75,6 +69,10 @@ class UIMainWindow:
 
         # Top Layout for Language Selection (aligned to the right)
         self.top_layout = QHBoxLayout()
+
+        # Checkbox "Comprar itens"
+        self.comprar_itens_checkbox = QCheckBox(parent)
+        self.top_layout.addWidget(self.comprar_itens_checkbox)
 
         # Spacer to push the combo box to the right
         self.top_layout.addItem(
@@ -267,6 +265,11 @@ class UIMainWindow:
         capture_buttons_text = self.translations.get("capture_button", {}).get(
             self.current_language, "Capturar"
         )
+        comprar_itens_text = self.translations.get("comprar_itens", {}).get(
+            self.current_language, "Comprar itens"
+        )
+
+        self.comprar_itens_checkbox.setText(comprar_itens_text)
 
         for i, key in enumerate(labels_keys):
             self.labels[i].setText(
@@ -300,9 +303,16 @@ class UIMainWindow:
         # Save the configuration to a JSON file
         self.config = {
             key: self.inputs[i].text()
-            for i, key in enumerate([k for k in self.config.keys() if k != "language"])
+            for i, key in enumerate(
+                [
+                    k
+                    for k in self.config.keys()
+                    if k not in ["language", "comprar_itens"]
+                ]
+            )
         }
         self.config["language"] = self.current_language
+        self.config["comprar_itens"] = self.comprar_itens_checkbox.isChecked()
         with open("preset_config.json", "w") as file:
             json.dump(self.config, file, indent=4)
         print("Configuração salva.")
@@ -321,9 +331,14 @@ class UIMainWindow:
             config = {
                 key: self.inputs[i].text()
                 for i, key in enumerate(
-                    [k for k in self.config.keys() if k != "language"]
+                    [
+                        k
+                        for k in self.config.keys()
+                        if k not in ["language", "comprar_itens"]
+                    ]
                 )
             }
+            config["comprar_itens"] = self.comprar_itens_checkbox.isChecked()
             with open(file_path, "w") as file:
                 json.dump(config, file, indent=4)
             print(f"Configuração exportada para {file_path}")
@@ -337,7 +352,11 @@ class UIMainWindow:
             with open(file_path, "r") as file:
                 self.config = json.load(file)
                 for i, key in enumerate(
-                    [k for k in self.config.keys() if k != "language"]
+                    [
+                        k
+                        for k in self.config.keys()
+                        if k not in ["language", "comprar_itens"]
+                    ]
                 ):
                     value = self.config.get(key, "")
                     if isinstance(
@@ -347,6 +366,9 @@ class UIMainWindow:
                             value
                         )  # Converter a lista para uma string separada por vírgulas
                     self.inputs[i].setText(value)
+                self.comprar_itens_checkbox.setChecked(
+                    self.config.get("comprar_itens", False)
+                )
             print(f"Configuração importada de {file_path}")
 
     def load_preset(self):
@@ -356,9 +378,16 @@ class UIMainWindow:
             with open(file_path, "r") as file:
                 self.config = json.load(file)
                 for i, key in enumerate(
-                    [k for k in self.config.keys() if k != "language"]
+                    [
+                        k
+                        for k in self.config.keys()
+                        if k not in ["language", "comprar_itens"]
+                    ]
                 ):
                     self.inputs[i].setText(self.config.get(key, ""))
+                self.comprar_itens_checkbox.setChecked(
+                    self.config.get("comprar_itens", False)
+                )
             print("Preset carregado.")
 
             saved_language = self.config.get("language", "pt")

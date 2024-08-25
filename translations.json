@@ -62,5 +62,9 @@
     "capture_button": {
         "pt": "Capturar",
         "en": "Capture"
+    },
+    "comprar_itens": {
+        "pt": "Comprar itens",
+        "en": "Buy itens"
     }
 }
