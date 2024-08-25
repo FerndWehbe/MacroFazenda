@@ -1,5 +1,6 @@
 import sys
 
+import qdarktheme
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from gui.ui_main import UIMainWindow
@@ -17,5 +18,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    qdarktheme.setup_theme("auto")
     window = MainWindow()
     sys.exit(app.exec())

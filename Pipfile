@@ -11,6 +11,7 @@ pyinstaller = "*"
 opencv-python = "*"
 ttkthemes = "*"
 pyside6 = "*"
+pyqtdarktheme = "*"
 
 [dev-packages]
 
