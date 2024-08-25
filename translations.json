@@ -32,6 +32,10 @@
         "en": "Tomato Position:"
     },
     "label_9": {
+        "pt": "Posição comprar:",
+        "en": "Buy Position:"
+    },
+    "label_10": {
         "pt": "Ciclo Plantação:",
         "en": "Planting Cycle:"
     },

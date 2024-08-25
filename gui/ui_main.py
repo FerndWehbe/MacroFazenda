@@ -41,7 +41,7 @@ class UIMainWindow:
 
         # Variáveis de configuração
         self.config = {
-            "comprar_itens": False,  # Adiciona a configuração para a checkbox
+            "comprar_itens": False,
             "point_acao": "",
             "multiplas_caixas": "",
             "opcao_trigo": "",
@@ -50,6 +50,7 @@ class UIMainWindow:
             "opcao_cenoura": "",
             "opcao_cogumelo": "",
             "opcao_tomate": "",
+            "opcao_comprar_semente": "",
             "ciclo_plantacao": "",
         }
 
@@ -99,7 +100,7 @@ class UIMainWindow:
         self.inputs = []
         self.buttons_capture = []
 
-        for i in range(8):
+        for i in range(9):
             row_layout = QHBoxLayout()
             label = QLabel(parent)
             input_text = QLineEdit(parent)
@@ -253,6 +254,7 @@ class UIMainWindow:
             "label_7",
             "label_8",
             "label_9",
+            "label_10",
         ]
         buttons_keys = [
             "button_1",
@@ -436,6 +438,9 @@ class UIMainWindow:
             opcao_cenoura = parse_position(self.config.get("opcao_cenoura", ""))
             opcao_cogumelo = parse_position(self.config.get("opcao_cogumelo", ""))
             opcao_tomate = parse_position(self.config.get("opcao_tomate", ""))
+            opcao_comprar_semente = parse_position(
+                self.config.get("opcao_comprar_semente", "")
+            )
             ciclo_plantacao = itertools.cycle(
                 self.config.get("ciclo_plantacao", "").split(",")
             )
@@ -496,6 +501,11 @@ class UIMainWindow:
                 if tipo_colheita in ("tomate", "tomato"):
                     pyautogui.click(opcao_tomate)
                 acao()
+                if self.config.get("comprar_itens"):
+                    time.sleep(0.5)
+                    pyautogui.click(opcao_comprar_semente)
+                    time.sleep(0.5)
+                    acao()
 
             while self.running:
                 loc_harvest = find_and_click_icon(self.colheita)
