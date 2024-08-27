@@ -14,15 +14,14 @@ Esta aplicação foi desenvolvida para automatizar o processo de colheita e plan
 - **Captura de Posições**: Capture as coordenadas na tela para ações específicas, como colheita, plantio e compra de itens.
 - **Ciclo de Plantação**: Configure um ciclo de plantação com diferentes tipos de culturas.
 - **Automação Completa**: Execute macros para automatizar o processo de colheita e plantio de acordo com as configurações salvas.
-- **Seleção de Idioma**: Suporte para múltiplos idiomas, permitindo alternar entre português e inglês.
-- **Interface Amigável**: Interface gráfica moderna e minimalista, com suporte a temas claros e escuros.
+- **Seleção de Idioma**: Permitindo alternar entre português e inglês.
 
 ## Instalação
 
 1. **Clone o Repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/FerndWehbe/MacroFazenda.git
+   cd MacroFazenda
    ```
 
 2. **Crie e Ative um Ambiente Virtual**:
@@ -87,15 +86,14 @@ This application was developed to automate the harvesting and planting process i
 - **Position Capture**: Capture screen coordinates for specific actions, such as harvesting, planting, and buying items.
 - **Planting Cycle**: Configure a planting cycle with different types of crops.
 - **Complete Automation**: Execute macros to automate the harvesting and planting process according to saved configurations.
-- **Language Selection**: Support for multiple languages, allowing you to switch between Portuguese and English.
-- **User-Friendly Interface**: Modern and minimalist graphical interface, with support for light and dark themes.
+- **Language Selection**: Allowing you to switch between Portuguese and English.
 
 ## Installation
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/FerndWehbe/MacroFazenda.git
+   cd MacroFazenda
    ```
 
 2. **Create and Activate a Virtual Environment**:
