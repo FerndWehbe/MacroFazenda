@@ -303,6 +303,7 @@ class UIMainWindow:
 
     def save_config(self):
         # Save the configuration to a JSON file
+        print(os.getcwd())
         self.config = {
             key: self.inputs[i].text()
             for i, key in enumerate(

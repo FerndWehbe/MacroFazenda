@@ -1,2 +1,6 @@
 automacao.log
 preset_config.json
+
+dist/*
+build/*
+*.spec

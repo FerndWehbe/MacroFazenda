@@ -14,6 +14,7 @@ pyside6 = "*"
 pyqtdarktheme = "*"
 
 [dev-packages]
+pyinstaller = "*"
 
 [requires]
 python_version = "3.11"
